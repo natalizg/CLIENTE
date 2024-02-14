@@ -31,9 +31,10 @@ export class PostService {
   }
   
   /** Método para crear un nuevo post */
+  //para acceder a una api se puede usar una promesa o tmb se puede hacer por httpClient con observables
   create(post: Post): Observable<any> {
-    return this.httpClient.post(this.apiURL + '/posts/', JSON.stringify(post), this.httpOptions) // Realiza una solicitud POST para crear un nuevo post
-      .pipe(
+    return this.httpClient.post(this.apiURL + '/posts/', JSON.stringify(post), this.httpOptions) // Realiza una solicitud POST a la api para crear un nuevo post. Observables?
+      .pipe( //con promesa no podría usar esto.
         catchError(this.errorHandler) // Maneja errores usando el método errorHandler
       )
   }

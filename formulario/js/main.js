@@ -27,6 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
         pasos[pasoActual - 1].style.display = "block";
         actualizarBarraDeProgreso();
     }
+
+
+
+    //FUNCIONES QUE REGULAN EL PASO DE PÁGINA Y ENTRADA DE DATOS_
+
+    function validarPag1() {
+        
+    }
     /* Función que pasa a la pag anterior 
     Oculta la actual y muestra la anterior.*/
 
