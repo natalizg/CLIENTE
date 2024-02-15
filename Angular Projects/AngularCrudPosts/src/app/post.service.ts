@@ -11,6 +11,7 @@ export class PostService {
 
   private apiUrl = 'assets/posts.json';
 
+  
   constructor(private http: HttpClient) { }
 
   getAllPosts(): Observable<Post[]> {
