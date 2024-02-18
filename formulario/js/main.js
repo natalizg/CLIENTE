@@ -29,12 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
-    //FUNCIONES QUE REGULAN EL PASO DE PÁGINA Y ENTRADA DE DATOS_
+    //FUNCIONES QUE REGULAN EL PASO DE PÁGINA Y ENTRADA DE DATOS:
 
     function validarPag1() {
         
     }
+
     /* Función que pasa a la pag anterior 
     Oculta la actual y muestra la anterior.*/
 
