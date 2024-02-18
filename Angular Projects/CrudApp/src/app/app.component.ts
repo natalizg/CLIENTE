@@ -1,4 +1,4 @@
-
+import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,10 +6,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogService } from './dialog.service';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogModule],
+  imports: [RouterOutlet, MatIconModule, MatToolbarModule, MatButtonModule,
+            MatDialogModule, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,6 +20,7 @@ export class AppComponent {
 
   //Método para abrir un Dialog con el componente Añadir Post: (usa el servicio Dialog creado por nosotros)
   constructor(private dialogService: DialogService) {}
+  
   openAddPostDialog() {
     this.dialogService.openAddPostDialog();
   }
