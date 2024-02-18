@@ -1,3 +1,14 @@
 {
-    "posts": []
+  "posts": [
+    {
+      "id": "63ec",
+      "titulo": "Prueba1",
+      "texto": "Prueba2"
+    },
+    {
+      "id": "6ec2",
+      "titulo": "Prueba3",
+      "texto": "3"
+    }
+  ]
 }

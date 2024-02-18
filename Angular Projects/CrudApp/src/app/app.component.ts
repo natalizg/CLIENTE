@@ -7,6 +7,8 @@ import { RouterOutlet } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogService } from './dialog.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PostService } from './services/post.service';
+import { OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,13 +17,30 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+
+export class AppComponent /*implements OnInit*/ {
   title = 'CrudApp';
 
   //Método para abrir un Dialog con el componente Añadir Post: (usa el servicio Dialog creado por nosotros)
-  constructor(private dialogService: DialogService) {}
+  constructor(private dialogService: DialogService, private postService: PostService) {}
   
+  
+  /*ngOnInit(): void {
+    this.getPostList();
+  }
+  */
+
   openAddPostDialog() {
     this.dialogService.openAddPostDialog();
   }
+/*
+  getPostList() {
+    this.postService.getPostList().subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: console.log,
+    })
+  }
+  */
 }
