@@ -13,10 +13,9 @@ export class PostService {
   }
   
 
-  /*
 
   getPostList(): Observable <any> {
     return this._http.get('http://localhost:3000/posts'); //esto devuelve un observable
   }
-  */
+  
 }
