@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getPostList();
+    this.chargeOrRefresh();
   }
   
   openAddPostDialog() {
@@ -49,20 +49,19 @@ export class AppComponent implements OnInit {
     
   }
 
-  openEditForm(data: any) {
-    this.dialogService.openEditForm(data);
-  }
-
-  getPostList() {
+  chargeOrRefresh() {
     this.postService.getPostList().subscribe({
       next: (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      error: console.log,
-      
-    })
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    },
+    error: console.log,
+  })
+  }
+
+  openEditForm(data: any) {
+    this.dialogService.openEditForm(data);
   }
 
   announceSortChange(sortState: Sort) {
@@ -77,7 +76,7 @@ export class AppComponent implements OnInit {
     this.postService.deletePost(id).subscribe ({
       next: (res) => {
         alert('Post borrado.');
-        this.getPostList();
+        this.chargeOrRefresh();
       },
       error: console.log,
     })

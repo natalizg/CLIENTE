@@ -11,6 +11,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { ReloadService } from '../services/reload.service';
 import { Inject } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-add-post',
@@ -29,6 +30,8 @@ export class AddPostComponent implements OnInit{
   constructor(
     private fb: FormBuilder, private _postService: PostService,
     private _dialogRef: DialogRef <AddPostComponent>,
+    //TO-DO No funciona por esta línea, borrarla
+    private _appComponent: AppComponent,
     @Inject(MAT_DIALOG_DATA) public data: any
     ) {
       this.postForm = this.fb.group({
@@ -47,6 +50,9 @@ export class AddPostComponent implements OnInit{
         this._postService.updatePost(this.data.id, this.postForm.value).subscribe({
           next: (val: any) => {
             alert('Post editado.')
+            //TO-DO No funciona por esta línea, borrarla
+            //Aquí hay que hacer una instancia para que consiga llamar a est método de la otra clase
+            this._appComponent.chargeOrRefresh();
             this._dialogRef.close();
           },
           error: (err: any) => {

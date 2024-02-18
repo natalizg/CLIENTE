@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Multipasos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>REGISTRO</header>
+        <div class="form-princ">
+            <form action="#">
+                <!-- PÁGINA 1 -->
+                <div class="pagina">
+                    <div class="titulo">Información Principal</div>
+                    <div class="campo">
+                        <div class="label">Nombre:</div>
+                        <input type="text" id="nombre" placeholder="">
+                    </div>
+                    <div class="campo">
+                        <div class="label">Primer Apellido:</div>
+                        <input type="text" id="apellido1" placeholder="">
+                    </div>
+                    <div class="campo">
+                        <div class="label">Segundo Apellido:</div>
+                        <input type="text" id="apellido2" placeholder="">
+                    </div>
+                    <div class="campo">
+                        <button>Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- PÁGINA 2 -->
+                <div class="pagina">
+                    <div class="titulo">Información Secundaria</div>
+                    <div class="campo">
+                        <div class="label">Fecha Nacimiento:</div>
+                        <input type="date" id="fechaNac" max="2012-12-21" value="2010-02-03">
+                    </div>
+                    <div class="campo">
+                        <div class="label">Género:</div>
+                        <select id="genero">
+                            <option value="-1" disabled selected> Elige la opción</option>
+                            <option value="0">Hombre</option>
+                            <option value="1">Mujer</option>
+                            <option value="2">No especificar</option>
+                        </select>
+                    </div>
+                    <div class="campo btns">
+                        <button class="volver-pag1 volver">Atrás</button>
+                        <button class="adelante-pag3 adelante">Siguiente</button>
+                    </div>
+                </div>
+
+                <!-- PÁGINA 3 -->
+                <div class="pagina">
+                    <div class="titulo">Información Contacto</div>
+                    <div class="campo">
+                        <div class="label">Correo electrónico:</div>
+                        <input type="text" id="correo">
+                    </div>
+                    <div class="campo">
+                        <div class="label">Número telefónico:</div>
+                        <input type="text" id="numTel">
+                    </div>
+                    <div class="campo btns">
+                        <button class="volver-pag2 volver">Atrás</button>
+                        <button class="adelante-pag4 adelante">Siguiente</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
