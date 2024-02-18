@@ -1,14 +1,19 @@
 {
   "posts": [
     {
-      "titulo": "Prueba1",
-      "texto": "Prueba1",
+      "titulo": "Prueba 1",
+      "texto": "Esta es la prueba 1",
       "id": "1"
     },
     {
       "id": "2",
-      "titulo": "prueba2",
-      "texto": "prueba2"
+      "titulo": "Prueba 2",
+      "texto": "Esta es la prueba 2"
+    },
+    {
+      "id": "3",
+      "titulo": "Prueba 3",
+      "texto": "Esta es la prueba 3"
     }
   ]
 }
