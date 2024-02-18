@@ -3,12 +3,14 @@ import { Component, Injectable } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { PostService } from '../services/post.service';
 import { DialogRef } from '@angular/cdk/dialog';
-
+import { ReloadService } from '../services/reload.service';
+import { Inject } from '@angular/core';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-post',
@@ -18,28 +20,51 @@ import { DialogRef } from '@angular/cdk/dialog';
   templateUrl: './add-post.component.html',
   styleUrl: './add-post.component.css'
 })
-export class AddPostComponent {
+
+
+export class AddPostComponent implements OnInit{
   
   postForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private _postService: PostService, private _dialogRef: DialogRef <AddPostComponent>) {
-    this.postForm = this.fb.group({
+  constructor(
+    private fb: FormBuilder, private _postService: PostService,
+    private _dialogRef: DialogRef <AddPostComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+    ) {
+      this.postForm = this.fb.group({
       titulo: '',
       texto: ''
     })
   }
 
+  ngOnInit(): void {
+    this.postForm.patchValue(this.data);
+  }
+
   onFormSubmit() {
     if(this.postForm.valid) {
-      this._postService.addPost(this.postForm.value).subscribe({
-        next: (val: any) => {
-          alert('Post añadido.')
-          this._dialogRef.close();
-        },
-        error: (err: any) => {
-          console.error(err);
-        },
-      });
+      if(this.data){
+        this._postService.updatePost(this.data.id, this.postForm.value).subscribe({
+          next: (val: any) => {
+            alert('Post editado.')
+            this._dialogRef.close();
+          },
+          error: (err: any) => {
+            console.error(err);
+          },
+        });
+      }else{
+        this._postService.addPost(this.postForm.value).subscribe({
+          next: (val: any) => {
+            alert('Post añadido.')
+            this._dialogRef.close();
+          },
+          error: (err: any) => {
+            console.error(err);
+          },
+        });
+      }
+      
     }
   }
 }

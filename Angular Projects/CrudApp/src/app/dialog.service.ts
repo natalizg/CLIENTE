@@ -12,4 +12,10 @@ export class DialogService {
   openAddPostDialog() {
     this.dialog.open(AddPostComponent);
   }
+
+  openEditForm(data: any) {
+    this.dialog.open(AddPostComponent, {
+      data
+    });
+  }
 }
