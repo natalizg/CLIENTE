@@ -41,7 +41,11 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.chargeOrRefresh();
+    this.loadOrRefresh();
+
+    this.reloadService.reload$.subscribe(() => {
+      this.loadOrRefresh();
+    });
   }
   
   openAddPostDialog() {
@@ -49,7 +53,7 @@ export class AppComponent implements OnInit {
     
   }
 
-  chargeOrRefresh() {
+  loadOrRefresh() {
     this.postService.getPostList().subscribe({
       next: (res) => {
       this.dataSource = new MatTableDataSource(res);
@@ -76,7 +80,7 @@ export class AppComponent implements OnInit {
     this.postService.deletePost(id).subscribe ({
       next: (res) => {
         alert('Post borrado.');
-        this.chargeOrRefresh();
+        this.loadOrRefresh();
       },
       error: console.log,
     })

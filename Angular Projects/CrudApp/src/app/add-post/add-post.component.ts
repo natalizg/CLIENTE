@@ -30,8 +30,7 @@ export class AddPostComponent implements OnInit{
   constructor(
     private fb: FormBuilder, private _postService: PostService,
     private _dialogRef: DialogRef <AddPostComponent>,
-    //TO-DO No funciona por esta línea, borrarla
-    private _appComponent: AppComponent,
+    private reloadService: ReloadService,
     @Inject(MAT_DIALOG_DATA) public data: any
     ) {
       this.postForm = this.fb.group({
@@ -49,11 +48,9 @@ export class AddPostComponent implements OnInit{
       if(this.data){
         this._postService.updatePost(this.data.id, this.postForm.value).subscribe({
           next: (val: any) => {
-            alert('Post editado.')
-            //TO-DO No funciona por esta línea, borrarla
-            //Aquí hay que hacer una instancia para que consiga llamar a est método de la otra clase
-            this._appComponent.chargeOrRefresh();
+            alert('Post actualizado.')
             this._dialogRef.close();
+            this.reloadService.reloadPage();
           },
           error: (err: any) => {
             console.error(err);
@@ -64,6 +61,7 @@ export class AddPostComponent implements OnInit{
           next: (val: any) => {
             alert('Post añadido.')
             this._dialogRef.close();
+            this.reloadService.reloadPage();
           },
           error: (err: any) => {
             console.error(err);

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReloadService {
 
-  constructor() { }
+  private reloadSubject = new Subject<void>();
+  reload$ = this.reloadSubject.asObservable();
   
   reloadPage() {
-    window.location.reload();
+    this.reloadSubject.next();
   }
 }
