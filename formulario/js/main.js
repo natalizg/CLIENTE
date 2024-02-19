@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     const formulario = document.getElementById("formRegistro");
     const pasos = document.querySelectorAll(".paso");
-    const botonesSiguiente = document.querySelectorAll(".btn-siguiente");
     const progressBar = document.querySelector(".progress-bar")
     const botonesAnterior = document.querySelectorAll(".btn-anterior");
 
@@ -9,10 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const irPag2 = document.getElementById("1a2");
     const irPag3 = document.getElementById("2a3");
     const irPag4 = document.getElementById("3a4");
+    const finalizar = document.getElementById("4aFinalizar");
 
     let pasoActual = 1;
 
+    ///////    IR A PAG 2   ///////
+
+    
     irPag2.addEventListener("click", () => {
+
         const nombre = document.getElementById("nombre").value.trim();
         const apellidos = document.getElementById("apellidos").value.trim();
         let nombreCorrecto = false;
@@ -56,7 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
 
+
+    ///////    IR A PAG 3   ///////
+
     irPag3.addEventListener("click", () => {
+
         const email = document.getElementById("email").value.trim();
         const telefono = document.getElementById("telefono").value.trim();
         let emailCorrecto = false;
@@ -101,7 +110,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
 
+
+    ///////    IR A PAG 4   ///////
+
     irPag4.addEventListener("click", () => {
+
         const contrasena = document.getElementById("contrasena").value.trim();
         const confirmarContrasena = document.getElementById("confirmarContrasena").value.trim();
         let contrasenaCorrecta = false;
@@ -109,8 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const regexContrasena = /^\S{8,}$/;
         let error5 = '';
         let error6 = '';
-        const iconContrasena = document.getElementById("contrasenaBtn");
-        const iconConfirmar = document.getElementById("confirmarBtn");
     
         //Validación del contraseña:
         if (contrasena === '') {
@@ -144,16 +155,48 @@ document.addEventListener("DOMContentLoaded", function () {
             siguientePaso();
         }
 
-        //visualizar contraseñas:
-
-        iconContrasena.addEventListener("click", e => {
-            if(contrasena.type === "password") {
-                contrasena.type = "text";
-            }else{
-                contrasena.type = "password";
-            }
-        })
     })
+
+
+    ///////    FINALIZAR FORMULARIO   ///////
+
+    finalizar.addEventListener("click", () => {
+        
+    });
+
+    //VISUALIZAR CONTRASEÑAS:
+
+    var contrasenaBtn = document.getElementById("contrasenaBtn");
+    var confirmarBtn = document.getElementById("confirmarBtn");
+    var contrasenaInput = document.getElementById("contrasena");
+    var confirmarInput = document.getElementById("confirmarContrasena");
+
+    //Mostrar contraseña:
+    contrasenaBtn.addEventListener("click", function() {
+        if (contrasenaInput.type === "password") {
+            contrasenaInput.type = "text";
+            contrasenaBtn.classList.remove('bxs-show');
+            contrasenaBtn.classList.add('bxs-hide');
+        } else {
+            contrasenaInput.type = "password";
+            contrasenaBtn.classList.remove('bxs-hide');
+            contrasenaBtn.classList.add('bxs-show');
+        }
+    });
+
+    //Mostrar confirmar contraseña:
+    confirmarBtn.addEventListener("click", function() {
+        if (confirmarInput.type === "password") {
+            confirmarInput.type = "text";
+            confirmarBtn.classList.remove('bxs-show');
+            confirmarBtn.classList.add('bxs-hide');
+        } else {
+            confirmarInput.type = "password";
+            confirmarBtn.classList.remove('bxs-hide');
+            confirmarBtn.classList.add('bxs-show');
+        }
+    });
+
 
 
     function actualizarBarraDeProgreso() {
@@ -182,10 +225,6 @@ document.addEventListener("DOMContentLoaded", function () {
         actualizarBarraDeProgreso();
     }
 
-    /*botonesSiguiente.forEach((boton) => {
-        boton.addEventListener("click", siguientePaso);
-    });
-    */
 
     botonesAnterior.forEach((boton) => {
         boton.addEventListener("click", pasoAnterior);
