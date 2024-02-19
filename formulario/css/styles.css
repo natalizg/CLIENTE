@@ -29,3 +29,8 @@
     cursor: pointer;
     user-select: none;
 }
+
+p {
+    margin-left: 10px;
+    color:red;
+}

@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const confirmarContrasena = document.getElementById("confirmarContrasena").value.trim();
         let contrasenaCorrecta = false;
         let confirmarCorrecta = false;
-        const regexContrasena = /^\S+@\S+\.\S+$/;
+        const regexContrasena = /^[^\s]{8}$/;
         let error5 = '';
         let error6 = '';
     
@@ -116,15 +116,15 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("contrasena").style.borderColor = "red";
         } else if (!regexContrasena.test(contrasena)){
             document.getElementById("contrasena").style.borderColor = "red";
-            document.getElementById("texto-contrasena").style.Color = "red";
+            document.getElementById("texto-contrasena").style.color = "red";
         }else{
             contrasenaCorrecta = true;
         }
     
         // Validación del confirmar Contraseña
         if (confirmarContrasena === '') {
-            error6 += 'El campo Confirmar contraseña es obligatorio.<br>';
-            document.getElementById("confirmarContrasena").style.color = "red";
+            error6 += 'El campo Confirmar contraseña es obligatorio.';
+            document.getElementById("confirmarContrasena").style.borderColor = "red";
         } else if (confirmarContrasena !== contrasena) {
             error6 += 'Las contraseñas no coinciden.';
             document.getElementById("confirmarContrasena").style.borderColor = "red";
