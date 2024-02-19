@@ -106,9 +106,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const confirmarContrasena = document.getElementById("confirmarContrasena").value.trim();
         let contrasenaCorrecta = false;
         let confirmarCorrecta = false;
-        const regexContrasena = /^[^\s]{8}$/;
+        const regexContrasena = /^\S{8,}$/;
         let error5 = '';
         let error6 = '';
+        const iconContrasena = document.getElementById("contrasenaBtn");
+        const iconConfirmar = document.getElementById("confirmarBtn");
     
         //Validación del contraseña:
         if (contrasena === '') {
@@ -141,6 +143,16 @@ document.addEventListener("DOMContentLoaded", function () {
         if(contrasenaCorrecta && confirmarCorrecta){
             siguientePaso();
         }
+
+        //visualizar contraseñas:
+
+        iconContrasena.addEventListener("click", e => {
+            if(contrasena.type === "password") {
+                contrasena.type = "text";
+            }else{
+                contrasena.type = "password";
+            }
+        })
     })
 
 
