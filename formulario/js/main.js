@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const irPag2 = document.getElementById("1a2");
     const irPag3 = document.getElementById("2a3");
     const irPag4 = document.getElementById("3a4");
-    const finalizar = document.getElementById("4aFinalizar");
 
     let pasoActual = 1;
 
@@ -160,8 +159,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
     ///////    FINALIZAR FORMULARIO   ///////
 
-    finalizar.addEventListener("click", () => {
-        
+    formulario.addEventListener("submit", () => {
+
+        //asegurarse de que todos los campos están rellenos..
+
+        const producto = document.getElementById("producto").value;
+        const detalleProducto = document.getElementById("detalleProducto").value;
+
+        // Precio estimado de los productos (inventado para este ejemplo)
+        let precioEstimado = 0;
+        switch (detalleProducto) {
+        case 'iphone':
+            precioEstimado = 1199;
+            break;
+        case 'samsung':
+            precioEstimado = 1299;
+            break;
+        case 'macbook':
+            precioEstimado = 1999;
+            break;
+        case 'dell':
+            precioEstimado = 1699;
+            break;
+        case 'appleWatch':
+            precioEstimado = 399;
+            break;
+        case 'samsungWatch':
+            precioEstimado = 349;
+            break;
+        case 'airpods':
+            precioEstimado = 249;
+            break;
+        case 'sony':
+            precioEstimado = 349;
+            break;
+        }
+
+
     });
 
     //VISUALIZAR CONTRASEÑAS:
@@ -196,6 +230,58 @@ document.addEventListener("DOMContentLoaded", function () {
             confirmarBtn.classList.add('bxs-show');
         }
     });
+
+
+
+    // CAMBIOS DEL SELECT ETC
+
+    const productoSelect = document.getElementById('producto');
+    const opcionesProducto = document.getElementById('opcionesProducto');
+    const detalleProductoSelect = document.getElementById('detalleProducto');
+
+    productoSelect.addEventListener('change', function() {
+
+        const productoSeleccionado = productoSelect.value;
+    
+        // Limpiar opciones anteriores
+        detalleProductoSelect.innerHTML = '<option disabled selected>Elija el producto:</option>';
+    
+        switch (productoSeleccionado) {
+          case 'smartphone':
+            addOption(detalleProductoSelect, 'iphone', 'iPhone 13 Pro');
+            addOption(detalleProductoSelect, 'samsung', 'Samsung Galaxy S22 Ultra');
+            break;
+          case 'laptop':
+            addOption(detalleProductoSelect, 'macbook', 'MacBook Pro M1 Pro');
+            addOption(detalleProductoSelect, 'dell', 'Dell XPS 15');
+            break;
+          case 'smartwatch':
+            addOption(detalleProductoSelect, 'appleWatch', 'Apple Watch Series 7');
+            addOption(detalleProductoSelect, 'samsungWatch', 'Samsung Galaxy Watch 4');
+            break;
+          case 'auriculares':
+            addOption(detalleProductoSelect, 'airpods', 'AirPods Pro');
+            addOption(detalleProductoSelect, 'sony', 'Sony WH-1000XM4');
+            break;
+          default:
+            // Si no se ha seleccionado un producto, ocultar el selector de opciones
+            opcionesProducto.style.display = 'none';
+            return;
+        }
+    
+        // Mostrar el selector de opciones si se ha seleccionado un producto
+        detalleProducto.style.display = 'block';
+        //opcionesProducto.style.width = '100%';
+    });
+
+
+    // Función auxiliar para añadir opciones al select
+    function addOption(select, value, text) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.text = text;
+        select.add(option);
+    }
 
 
 
