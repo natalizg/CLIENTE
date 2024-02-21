@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const irPag2 = document.getElementById("1a2");
     const irPag3 = document.getElementById("2a3");
     const irPag4 = document.getElementById("3a4");
+    const finalizar = document.getElementById("4aFinalizar");
 
     let pasoActual = 1;
 
@@ -156,47 +157,90 @@ document.addEventListener("DOMContentLoaded", function () {
 
     })
 
+    /////// VALIDACIONES PAG 4 ///////////
 
-    ///////    FINALIZAR FORMULARIO   ///////
+    finalizar.addEventListener("click", () => {
 
-    formulario.addEventListener("submit", () => {
-
-        //asegurarse de que todos los campos están rellenos..
-
+        const estudianteSiRadio = document.getElementById("estudianteSi");
+        const estudianteNoRadio = document.getElementById("estudianteNo");
+    
         const producto = document.getElementById("producto").value;
         const detalleProducto = document.getElementById("detalleProducto").value;
-
-        // Precio estimado de los productos (inventado para este ejemplo)
-        let precioEstimado = 0;
-        switch (detalleProducto) {
-        case 'iphone':
-            precioEstimado = 1199;
-            break;
-        case 'samsung':
-            precioEstimado = 1299;
-            break;
-        case 'macbook':
-            precioEstimado = 1999;
-            break;
-        case 'dell':
-            precioEstimado = 1699;
-            break;
-        case 'appleWatch':
-            precioEstimado = 399;
-            break;
-        case 'samsungWatch':
-            precioEstimado = 349;
-            break;
-        case 'airpods':
-            precioEstimado = 249;
-            break;
-        case 'sony':
-            precioEstimado = 349;
-            break;
+        const esEstudiante = estudianteSiRadio.checked || estudianteNoRadio.checked;
+        let errores = false;
+    
+        // Validar selección de producto
+        if (producto === "Selecciona el tipo: ") {
+            document.getElementById("error7").innerText = "Seleccione una opción.";
+            document.getElementById("producto").style.borderColor = "red";
+            errores = true;
+        } else {
+            document.getElementById("error7").innerText = "";
         }
+    
+        // Validar selección de detalle producto
+        if (detalleProducto === "Elija el producto:") {
+            document.getElementById("error8").innerText = "Seleccione una opción.";
+            document.getElementById("detalleProducto").style.borderColor = "red";
+            errores = true;
+        } else {
+            document.getElementById("error8").innerText = "";
+        }
+    
+        // Validar selección de estudiante
+        if (!esEstudiante) {
+            document.getElementById("error9").innerText = "Seleccione si es estudiante o no.";
+            errores = true;
+        } else {
+            document.getElementById("error9").innerText = "";
+        }
+    
+        // Si no hay errores, avanzar al siguiente paso
+        if (!errores) {
+            let precioFinal;
+            let mensaje;
+            switch (detalleProducto) {
+                case 'iphone':
+                    precioFinal = esEstudiante ? 1199 * 0.85 : 1199 * 1.21;
+                    break;
+                case 'samsung':
+                    precioFinal = esEstudiante ? 1299 * 0.85 : 1299 * 1.21;
+                    break;
+                case 'macbook':
+                    precioFinal = esEstudiante ? 1999 * 0.85 : 1999 * 1.21;
+                    break;
+                case 'dell':
+                    precioFinal = esEstudiante ? 1699 * 0.85 : 1699 * 1.21;
+                    break;
+                case 'appleWatch':
+                    precioFinal = esEstudiante ? 399 * 0.85 : 399 * 1.21;
+                    break;
+                case 'samsungWatch':
+                    precioFinal = esEstudiante ? 349 * 0.85 : 349 * 1.21;
+                    break;
+                case 'airpods':
+                    precioFinal = esEstudiante ? 249 * 0.85 : 249 * 1.21;
+                    break;
+                case 'sony':
+                    precioFinal = esEstudiante ? 349 * 0.85 : 349 * 1.21;
+                    break;
+            }
 
-
+            const nombre = document.getElementById("nombre").value;
+            if (estudianteSiRadio.checked) {
+                const precioConDescuento = Math.round(precioFinal * 100) / 100;
+                mensaje = `Hola, ${nombre}. Por ser estudiante, cuentas con un 15% de descuento. Tu presupuesto final es ${precioConDescuento}€ .`;
+            } else {
+                const precioConIVA = Math.round(precioFinal * 100) / 100;
+                mensaje = `Hola, ${nombre}. Tu producto cuenta con un 21% de IVA, así que este es el precio final: ${precioConIVA}€ . Avisa a tus compañeros estudiantes para ahorrarte el IVA y contar con un 15% de descuento.`;
+            }
+            
+            alert(mensaje);
+            location.reload();
+        }
     });
+
+
 
     //VISUALIZAR CONTRASEÑAS:
 
@@ -316,5 +360,37 @@ document.addEventListener("DOMContentLoaded", function () {
         boton.addEventListener("click", pasoAnterior);
     });
 
-    formulario.addEventListener("submit", (e) => e.preventDefault());
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault();
+    });
+
+    // Para que pase de página al darle al enter.
+
+    document.addEventListener("keydown", function(event) {
+        // Verificar si la tecla presionada es "Enter" (código 13)
+        if (event.key === "Enter") {
+            switch (pasoActual) {
+                case 1:
+                    // Simular clic en el botón para ir a la página 2
+                    irPag2.click();
+                    break;
+                case 2:
+                    // Simular clic en el botón para ir a la página 3
+                    irPag3.click();
+                    break;
+                case 3:
+                    // Simular clic en el botón para ir a la página 4
+                    irPag4.click();
+                    break;
+                case 4:
+                    // Simular clic en el botón "Finalizar"
+                    finalizar.click();
+                    break;
+                default:
+                    // No hacer nada si el paso actual no está definido
+                    break;
+            }
+        }
+    });
+
 });
