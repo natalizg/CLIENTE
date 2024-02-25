@@ -5,7 +5,18 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './about.component.html',
-  styles: ``
+  styles: 
+  `
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+  p {
+    text-align: center;    
+  }
+  .social-icon {
+    margin-right: 100px;
+  }
+  `
 })
 export class AboutComponent {
 
