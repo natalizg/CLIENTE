@@ -1,29 +1,25 @@
 import { Component } from '@angular/core';
-import { PaisService } from '../../services/pais.service';
 import { Country } from '../../interfaces/pais.interface';
-import { PaisTablaComponent } from '../../components/pais-tabla/pais-tabla.component';
-import { PaisInputComponent } from '../../components/pais-input/pais-input.component';
+import { PaisService } from '../../services/pais.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PaisTablaComponent } from '../../components/pais-tabla/pais-tabla.component';
+import { PaisInputComponent } from '../../components/pais-input/pais-input.component';
 
 @Component({
-  selector: 'app-por-pais',
+  selector: 'app-por-capital',
   standalone: true,
   imports: [PaisTablaComponent, PaisInputComponent, RouterModule, CommonModule],
-  templateUrl: './por-pais.component.html',
-  styles: 
-      `
-        li {
-            cursor: pointer;
-          }
-      `
+  templateUrl: './por-capital.component.html',
+  styles: [
+  ]
 })
-export class PorPaisComponent {
-  
+export class PorCapitalComponent {
+
   termino : string = '';
   hayError: boolean = false;
   paises  : Country[] = [];
-  
+
   paisesSugeridos   : Country[] = [];
   mostrarSugerencias: boolean = false;
 
@@ -35,7 +31,7 @@ export class PorPaisComponent {
     this.hayError = false;
     this.termino  = termino;
 
-    this.paisService.buscarPais( termino )
+    this.paisService.buscarCapital( termino )
       .subscribe( (paises) => {
         this.paises = paises;
       }, (err) => {
@@ -50,7 +46,7 @@ export class PorPaisComponent {
     this.termino = termino;
     this.mostrarSugerencias = true;
     
-    this.paisService.buscarPais( termino )
+    this.paisService.buscarCapital( termino )
       .subscribe( 
         paises => this.paisesSugeridos = paises.splice(0,5),
         (err) => this.paisesSugeridos = []
